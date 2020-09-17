@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SignInWrapper = styled.div`
+const AuthWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@ const SignInWrapper = styled.div`
   }
 `;
 
-const SignInContainer = styled.div`
+const AuthContainer = styled.div`
   margin-top: 90px;
   min-width: 368px;
 `;
@@ -31,6 +31,7 @@ const Header = styled.div`
     font-weight: 600;
     font-size: 33px;
     font-family: Avenir, helvetica neue, Arial, Helvetica, sans-serif;
+    margin-bottom: initial;
   }
 `;
 
@@ -38,13 +39,9 @@ const Content = styled.div`
   margin-top: 20px;
 `;
 
-const ErrorWrapper = styled.div`
-  margin-top: 8px;
-`;
-
 export {
-  SignInWrapper,
-  SignInContainer,
+  AuthWrapper,
+  AuthContainer,
   Header,
   Content,
 }

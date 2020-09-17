@@ -1,7 +1,8 @@
 import React from 'react';
+import { DashboardWrapper } from './styled';
 
 export function Dashboard() {
-  return <div>Dashboard page</div>;
+  return <DashboardWrapper>Dashboard page</DashboardWrapper>;
 }
 
 Dashboard.propTypes = {};

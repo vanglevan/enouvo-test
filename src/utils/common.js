@@ -30,6 +30,7 @@ function isAuthenticated() {
   if (token) {
     return token;
   }
+
   return false;
 }
 

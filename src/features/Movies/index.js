@@ -1,18 +1,47 @@
-import React, { useEffect } from 'react';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { memo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Space } from 'antd';
+import { Table } from 'antd';
 import moment from 'moment';
 
 import { getMoviesAsync, selectMovies, selectIsFetchingMovies, selectTotalMovies } from './moviesSlice';
 import { MoviesWrapper } from './styled';
+
+const columns = [
+  {
+    title: 'Name',
+    width: 200,
+    dataIndex: 'name',
+    key: 'name',
+    render: text => <a>{text}</a>,
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
+  },
+  {
+    title: 'Time (minutes)',
+    width: 100,
+    align: 'center',
+    dataIndex: 'time',
+    key: 'time',
+  },
+  {
+    title: 'Release Date',
+    width: 180,
+    dataIndex: 'releaseDate',
+    key: 'releaseDate',
+    render: value => moment(value).format('MMMM DD, YYYY'),
+  },
+];
 
 export function Movies(props) {
   const movies = useSelector(selectMovies);
   const isFetching = useSelector(selectIsFetchingMovies);
   const totalMovies = useSelector(selectTotalMovies);
   const dispatch = useDispatch();
-
-  console.log('movies', movies)
 
   useEffect(() => {
     const params = {
@@ -23,52 +52,12 @@ export function Movies(props) {
     dispatch(getMoviesAsync(params));
   }, []);
 
-  const columns = [
-    {
-      title: 'Name',
-      width: 200,
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a>{text}</a>,
-    },
-    {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-    },
-    {
-      title: 'Time (minutes)',
-      width: 100,
-      align: 'center',
-      dataIndex: 'time',
-      key: 'time',
-    },
-    {
-      title: 'Release Date',
-      width: 180,
-      dataIndex: 'releaseDate',
-      key: 'releaseDate',
-      render: value => moment(value).format('MMMM DD, YYYY'),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-        <Space size="middle">
-          <a>Update</a>
-          <a>Delete</a>
-        </Space>
-      ),
-    },
-  ];
-
   const pagination = {
     total: totalMovies,
   }
 
-  const onChange = (pagination) => {
-    console.log('pagination', pagination);
-    const { current, pageSize, total } = pagination;
+  const handleChangePagination = (pagination) => {
+    const { current, pageSize } = pagination;
 
     const params = {
       limit: pageSize,
@@ -86,7 +75,7 @@ export function Movies(props) {
         pagination={pagination}
         columns={columns}
         dataSource={movies || []}
-        onChange={onChange}
+        onChange={handleChangePagination}
       />
     </MoviesWrapper>
   );
@@ -94,4 +83,4 @@ export function Movies(props) {
 
 Movies.propTypes = {};
 
-export default Movies;
+export default memo(Movies);

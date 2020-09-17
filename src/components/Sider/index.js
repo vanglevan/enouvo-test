@@ -1,37 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Menu } from 'antd';
-import {
-  ProjectOutlined,
-  ProfileOutlined,
-  DollarCircleOutlined,
-  SettingOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from '@ant-design/icons';
+import { ProjectOutlined, DollarCircleOutlined } from '@ant-design/icons';
 
-// import { HOME, MOVIES } from '../../utils/constants/routes';
-
+import { MENU_KEYS } from '../../utils/constants/constants';
 import config from './config';
-import {
-  StyledSider,
-  StyledMenuFoldOutlined,
-  StyledMenuUnfoldOutlined,
-} from './StyledSider';
+import { StyledSider } from './StyledSider';
 
 const menuItems = [
   {
     id: 0,
-    name: 'DASHBOARD',
+    name: MENU_KEYS.DASHBOARD,
     label: 'Dashboard',
     icon: <DollarCircleOutlined />,
     route: '/',
   },
   {
-    id: 2,
-    name: 'MOVIES',
+    id: 1,
+    name: MENU_KEYS.MOVIES,
     label: 'Movies',
     icon: <ProjectOutlined />,
     route: '/movies',
@@ -39,45 +26,52 @@ const menuItems = [
 ];
 
 function Sider(props) {
-  const { history } = props;
-  const [collapsed, setCollapsed] = useState(false);
+  const { location } = props;
+  let defaultMenuSelected = '';
+
+  if (location.pathname) {
+    switch (location.pathname) {
+      case '/':
+        defaultMenuSelected = MENU_KEYS.DASHBOARD;
+        break;
+      case '/movies':
+      case '/movies/':
+        defaultMenuSelected = MENU_KEYS.MOVIES;
+        break;
+      default:
+        defaultMenuSelected = '';
+        break;
+    }
+  }
 
   const menus = menuItems.map(item => (
-    <Menu.Item key={item.id} icon={item.icon}>
+    <Menu.Item key={item.name} icon={item.icon}>
       {item.label}
     </Menu.Item>
   ));
 
-  const toggleSider = () => {
-    setCollapsed(!collapsed);
-  };
-
   const handleClickMenu = e => {
-    history.push(menuItems[e.key].route);
+    const menuSelected = menuItems.find(item => item.name === e.key);
+    if (menuSelected) {
+      props.history.push(menuSelected.route || '/');
+    }
   };
 
   return (
-    <StyledSider trigger={null} collapsible collapsed={collapsed}>
+    <StyledSider collapsible>
       <div className="logo">
         <a href="/">
-          {/* <img src="" alt="logo" /> */}
           <h1>Enouvo</h1>
         </a>
       </div>
       <Menu
+        trigger={null}
         theme={config.theme}
         mode={config.mode}
-        defaultSelectedKeys={['0']}
+        defaultSelectedKeys={defaultMenuSelected}
         onClick={handleClickMenu}
       >
         {menus}
-        <li>
-          {collapsed ? (
-            <StyledMenuUnfoldOutlined onClick={toggleSider} />
-          ) : (
-            <StyledMenuFoldOutlined onClick={toggleSider} />
-          )}
-        </li>
       </Menu>
     </StyledSider>
   );

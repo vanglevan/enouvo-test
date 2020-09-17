@@ -2,7 +2,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { HOME } from '../../utils/constants/routes';
 import { isAuthenticated } from '../../utils/common';
 
 const AuthRoute = ({ component: Component, ...rest }) => (

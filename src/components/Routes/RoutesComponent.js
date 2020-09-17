@@ -1,17 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import PrivateRoute from './PrivateRoute';
 import AuthRoute from './AuthRoute';
-
 import { authRoutes, privateRoutes } from '../../utils/constants/routes';
 
 const { Content } = Layout;
 
-const RoutesComponent = () => (
-  <Content>
-    <Router>
+const RoutesComponent = () => {
+  console.log('RoutesComponent');
+  return (
+    <Content>
       <Switch>
         {authRoutes.map(route => (
           <AuthRoute
@@ -32,8 +32,8 @@ const RoutesComponent = () => (
           />
         ))}
       </Switch>
-    </Router>
-  </Content>
-);
+    </Content>
+  );
+};
 
 export default RoutesComponent;
