@@ -8,7 +8,6 @@ import { Form, Input, Button, Alert } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { selectSignInError, signInAsync } from '../authSlice';
-
 import { SignInWrapper, SignInContainer } from './styled';
 
 function SignInPage(props) {
@@ -77,7 +76,6 @@ SignInPage.propsType = {
   history: PropTypes.object,
 };
 
-// export default withRouter(SignInPage);
 export default compose(
   withRouter,
   memo,

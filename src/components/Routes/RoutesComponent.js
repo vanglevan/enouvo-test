@@ -9,7 +9,6 @@ import { authRoutes, privateRoutes } from '../../utils/constants/routes';
 const { Content } = Layout;
 
 const RoutesComponent = () => {
-  console.log('RoutesComponent');
   return (
     <Content>
       <Switch>

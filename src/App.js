@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'antd/dist/antd.css';
-// import './App.css';
 
 import RoutesComponent from './components/Routes/RoutesComponent';
 import { selectUser, getOwnerUserInfoAsync } from './features/Auth/authSlice';

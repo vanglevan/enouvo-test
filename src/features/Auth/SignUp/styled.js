@@ -10,7 +10,7 @@ const SignUpWrapper = styled.div`
 
 const SignUpContainer = styled.div`
   /* margin-top: 90px; */
-  min-width: 500px;
+  min-width: 600px;
 `;
 
 export {
