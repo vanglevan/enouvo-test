@@ -30,11 +30,10 @@ export const { getMovies, getMoviesSuccess, getMoviesFailure } = moviesSlice.act
 
 export const getMoviesAsync = params => async dispatch => {
   try {
-    console.log('getMoviesAsync - params', params);
     const response = await moviesApi.getAllMovies(params);
-    console.log('response', response);
     dispatch(getMoviesSuccess(response && response.data));
   } catch (error) {
+    console.log('getMoviesAsync - error', error)
     dispatch(getMoviesFailure());
   }
 };

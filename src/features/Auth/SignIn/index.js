@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { compose } from 'redux';
-import { Form, Input, Button, Alert } from 'antd';
+import { Form, Input, Button, Alert, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { selectSignInError, signInAsync } from '../authSlice';
@@ -22,6 +22,10 @@ function SignInPage(props) {
 
     dispatch(signInAsync(payload)).then(res => {
       if (res) {
+        // show notification
+        notification.success({
+          message: 'Login successful!',
+        });
         props.history.push('/');
       }
     });

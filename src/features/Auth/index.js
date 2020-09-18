@@ -7,10 +7,10 @@ import { AuthWrapper, AuthContainer, Header, Content } from './styled';
 function AuthPage(props) {
   const { routes } = props;
 
-  const listRoutes = routes && routes.map(item => {
+  const listRoutes = routes && routes.map((item, idx) => {
     const Component = item.component;
     return (
-      <Route exact path={item.path} render={props => <Component {...props} />} />
+      <Route key={idx} exact path={item.path} render={props => <Component {...props} />} />
     )
   });
 

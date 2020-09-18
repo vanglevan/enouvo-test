@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { compose } from 'redux';
-import { Form, Input, Button, Alert, Select } from 'antd';
+import { Form, Input, Button, Alert, Select, notification } from 'antd';
 
 import { SignUpWrapper, SignUpContainer } from './styled';
 import { signUpAsync, selectSignUpError } from '../authSlice';
@@ -29,9 +29,9 @@ function SignUpPage(props) {
 
   const handleChangeCountry = countryCode => {
     setCountrySelected(countryCode);
+    setCityCodeSelected(null);
     const cityOfCountry = citiesOfCountry.filter(item => item.countryCode === countryCode);
     setCities(cityOfCountry);
-    setCityCodeSelected(null);
   };
 
   const handleChangeCity = cityCode => {
@@ -55,6 +55,11 @@ function SignUpPage(props) {
 
     dispatch(signUpAsync(payload)).then(res => {
       if (res) {
+        // show notification
+        notification.success({
+          message: 'User registration successful!',
+        });
+        // redirect page
         props.history.push('/');
       }
     });
