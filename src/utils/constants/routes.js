@@ -1,9 +1,9 @@
-import AuthPage from '../../features/Auth';
+import AuthPage from '../../features/Auth/Loadable';
 import SignInPage from '../../features/Auth/SignIn';
 import SignUpPage from '../../features/Auth/SignUp';
 import SecurityLayout from '../../layouts/SecurityLayout';
-import DashboardPage from '../../features/Dashboard';
-import MoviesPage from '../../features/Movies';
+import DashboardPage from '../../features/Dashboard/Loadable';
+import MoviesPage from '../../features/Movies/Loadable';
 import PageNotFound from '../../features/PageNotFound';
 
 const HOME = '/';
